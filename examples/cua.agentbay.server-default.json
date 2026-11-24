@@ -1,0 +1,19 @@
+{
+  "defaultProfile": "cloud",
+  "profiles": {
+    "cloud": {
+      "provider": "agentbay",
+      "agentbay": {
+        "mode": "create",
+        "imageId": "imgc-0ab5tdslhgux1tf3g",
+        "keepAliveMs": 180000,
+        "maxRuntime": 240,
+        "lifecycleMode": "server-default"
+      }
+    }
+  },
+  "service": {
+    "executeWaitMs": 20000,
+    "cellTimeoutMs": 120000
+  }
+}

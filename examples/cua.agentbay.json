@@ -1,0 +1,16 @@
+{
+  "defaultProfile": "cloud",
+  "profiles": {
+    "cloud": {
+      "provider": "agentbay",
+      "agentbay": {
+        "mode": "create",
+        "imageId": "REPLACE_WITH_YOUR_BROWSER_IMAGE_ID",
+        "idleReleaseTimeout": 10,
+        "keepAliveMs": 180000,
+        "maxRuntime": 240
+      }
+    }
+  },
+  "service": { "executeWaitMs": 20000, "cellTimeoutMs": 60000 }
+}

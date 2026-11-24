@@ -1,0 +1,21 @@
+{
+  "name": "@cua/preview",
+  "version": "0.7.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "public"
+  ],
+  "dependencies": {
+    "@cua/contracts": "workspace:*",
+    "@cua/service": "workspace:*",
+    "@cua/browser-chromium": "workspace:*",
+    "@cua/browser-sandbox": "workspace:*"
+  }
+}

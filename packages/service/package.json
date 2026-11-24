@@ -1,0 +1,21 @@
+{
+  "name": "@cua/service",
+  "version": "0.7.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "@cua/contracts": "workspace:*",
+    "@cua/core": "workspace:*",
+    "@cua/repl": "workspace:*",
+    "@cua/history": "workspace:*"
+  }
+}

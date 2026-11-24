@@ -1,0 +1,32 @@
+{
+  "name": "@cua/cli",
+  "version": "0.7.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "@cua/runner": "workspace:*",
+    "@cua/dashboard": "workspace:*",
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@cua/contracts": "workspace:*",
+    "@cua/service": "workspace:*",
+    "@cua/mcp": "workspace:*",
+    "@cua/browser-local": "workspace:*",
+    "@cua/browser-chromium": "workspace:*",
+    "@cua/browser-agentbay": "workspace:*",
+    "@cua/browser-sandbox": "workspace:*",
+    "@cua/history": "workspace:*",
+    "@cua/recipes": "workspace:*"
+  },
+  "bin": {
+    "cua": "./dist/index.js"
+  }
+}

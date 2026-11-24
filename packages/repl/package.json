@@ -1,0 +1,19 @@
+{
+  "name": "@cua/repl",
+  "version": "0.7.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "@cua/contracts": "workspace:*",
+    "meriyah": "7.4.0"
+  }
+}

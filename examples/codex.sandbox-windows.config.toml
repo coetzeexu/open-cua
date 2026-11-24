@@ -1,0 +1,10 @@
+# Codex / its stdio executor must run INSIDE the Windows sandbox.
+# This does not connect a local Codex process to a remote Windows host.
+[mcp_servers.cua]
+command = 'C:\cua\runtime\node.exe'
+args = ['C:\cua\deploy\sandbox\start.mjs']
+cwd = 'C:\cua'
+startup_timeout_sec = 60
+tool_timeout_sec = 45
+# Optional: forward only variables configured in the executor environment.
+# env_vars = ["CUA_BROWSER_CDP_URL", "CUA_BROWSER_PROFILE", "CUA_BROWSER_HANDOFF_URL"]

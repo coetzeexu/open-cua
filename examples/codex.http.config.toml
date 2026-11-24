@@ -1,0 +1,9 @@
+# HTTPS endpoint returned by your sandbox port forwarding / TLS gateway.
+# Keep credentials in the Codex host environment, never in this file.
+[mcp_servers.cua_remote]
+url = "https://your-sandbox-forwarding-host/mcp"
+bearer_token_env_var = "CUA_MCP_TOKEN"
+startup_timeout_sec = 60
+tool_timeout_sec = 45
+
+# Enable CUA_MCP_APPS=1 in the remote CUA service environment for the embedded panel.

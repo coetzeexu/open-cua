@@ -1,0 +1,35 @@
+{
+  "defaultProfile": "local",
+  "profiles": {
+    "local": {
+      "provider": "local",
+      "local": {
+        "mode": "attach",
+        "endpoint": "http://127.0.0.1:63325"
+      }
+    }
+  },
+  "service": {
+    "executeWaitMs": 20000,
+    "cellTimeoutMs": 60000,
+    "imageOutput": "inline"
+  },
+  "history": {
+    "enabled": true,
+    "directory": "~/.cua/local/history",
+    "captureOnFailure": true,
+    "upload": {
+      "enabled": false
+    },
+    "maxEventBytes": 4194304
+  },
+  "recipes": {
+    "directory": "~/.cua/local/recipes",
+    "distill": {
+      "mode": "manual"
+    },
+    "repair": {
+      "mode": "manual"
+    }
+  }
+}

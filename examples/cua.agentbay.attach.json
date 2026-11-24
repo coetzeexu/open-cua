@@ -1,0 +1,13 @@
+{
+  "defaultProfile": "cloud",
+  "profiles": {
+    "cloud": {
+      "provider": "agentbay",
+      "agentbay": {
+        "mode": "attach",
+        "sessionId": "REPLACE_WITH_INITIALIZED_AGENTBAY_SESSION_ID"
+      }
+    }
+  },
+  "service": { "executeWaitMs": 20000, "cellTimeoutMs": 60000 }
+}

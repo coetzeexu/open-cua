@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>私密登录</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font:
+          14px system-ui,
+          sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 16px;
+      }
+      main {
+        max-width: 420px;
+        margin: auto;
+      }
+      h1 {
+        font-size: 17px;
+        margin: 0 0 8px;
+      }
+      #origin {
+        overflow-wrap: anywhere;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+        margin: 12px 0;
+      }
+      input,
+      button {
+        font: inherit;
+        padding: 9px;
+        border: 1px solid #888;
+        border-radius: 6px;
+      }
+      input {
+        min-width: 0;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:disabled {
+        cursor: default;
+        opacity: 0.6;
+      }
+      small {
+        display: block;
+        margin-top: 12px;
+        opacity: 0.75;
+      }
+      #status {
+        margin: 12px 0;
+      }
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>账号密码登录</h1>
+      <div id="origin"></div>
+      <div id="status" role="status">等待登录请求…</div>
+      <form id="login" hidden>
+        <div id="fields"></div>
+        <button id="submit" type="submit">私密提交</button>
+        <button id="cancel" type="button">取消</button>
+      </form>
+      <small
+        >请核对站点。输入通过私密通道填写到浏览器，不作为聊天消息发送。手机号验证码或人机验证请使用浏览器面板人工接管。</small
+      >
+    </main>
+    <script type="module">
+      __APP_SCRIPT__;
+    </script>
+  </body>
+</html>

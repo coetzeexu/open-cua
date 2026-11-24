@@ -1,0 +1,8 @@
+# Codex / its stdio executor must run INSIDE the Ubuntu sandbox.
+[mcp_servers.cua]
+command = "/opt/cua/runtime/node"
+args = ["/opt/cua/deploy/sandbox/start.mjs"]
+cwd = "/opt/cua"
+startup_timeout_sec = 60
+tool_timeout_sec = 45
+# env_vars = ["CUA_BROWSER_CDP_URL", "CUA_BROWSER_PROFILE", "CUA_BROWSER_HANDOFF_URL"]

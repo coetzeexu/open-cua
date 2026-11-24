@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="cua-token" content="__SESSION_TOKEN__" />
+    <title>CUA · 脚本执行中心</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="CUA 首页"
+          ><span class="brand-icon">✦</span> CUA
+          <span class="brand-sub">CONSOLE</span></a
+        >
+        <div class="workspace-label">
+          <span class="online-dot"></span> 本地工作空间
+        </div>
+        <button class="nav-all selected" data-action="all">
+          <span>▦</span> 全部脚本 <span id="recipe-count" class="count">—</span>
+        </button>
+        <div class="sidebar-heading">脚本库 <span>RECIPES</span></div>
+        <label class="search"
+          ><span>⌕</span
+          ><input id="search" placeholder="搜索脚本…" aria-label="搜索脚本"
+        /></label>
+        <nav id="recipe-nav" aria-label="脚本列表">
+          <div class="muted loading">读取脚本…</div>
+        </nav>
+        <button class="history-nav" data-action="history">
+          ◷ <span>全部历史</span>
+        </button>
+        <div class="sidebar-footer">
+          <span class="local-symbol">⌘</span>
+          <div>
+            <strong>本机运行</strong><small>历史与脚本保存在本地</small>
+          </div>
+          <span class="online-dot"></span>
+        </div>
+      </aside>
+      <main>
+        <header class="topbar">
+          <div class="breadcrumb">
+            WORKSPACE <span>/</span> <b>脚本执行中心</b>
+          </div>
+          <div class="top-actions">
+            <span id="sync-state" class="sync-state">连接中</span
+            ><button
+              class="icon-button"
+              data-action="refresh"
+              title="刷新"
+              aria-label="刷新"
+            >
+              ↻</button
+            ><button
+              class="icon-button"
+              data-action="theme"
+              title="切换明暗主题"
+              aria-label="切换明暗主题"
+            >
+              ◐
+            </button>
+          </div>
+        </header>
+        <div class="page">
+          <div id="notice" class="notice" role="status" hidden></div>
+          <div class="page-title">
+            <div>
+              <div class="eyebrow">AUTOMATION, OBSERVED.</div>
+              <h1 id="page-heading">脚本执行中心</h1>
+              <p id="page-description">
+                从脚本到每一步执行，所有记录都在这里。
+              </p>
+            </div>
+            <div class="local-badge">
+              <span class="online-dot"></span> LOCAL
+            </div>
+          </div>
+          <section id="stats" class="stats" aria-label="执行统计"></section>
+          <section id="catalog" class="catalog"></section>
+          <section id="recipe-header" class="recipe-header" hidden></section>
+          <div id="tabs" class="tabs" role="tablist">
+            <button data-tab="runs" role="tab" aria-selected="true">
+              执行记录 <span id="run-count"></span></button
+            ><button data-tab="code" role="tab">脚本与校验</button
+            ><button data-tab="versions" role="tab">版本记录</button>
+          </div>
+          <section id="runs-panel" class="panel" role="tabpanel">
+            <div class="section-toolbar">
+              <div>
+                <h2>执行轨迹</h2>
+                <span class="muted">选择一次运行，展开查看每个调用</span>
+              </div>
+              <select id="run-filter" aria-label="筛选执行类型">
+                <option value="all">所有类型</option>
+                <option value="run">普通运行</option>
+                <option value="validation">版本验证</option>
+                <option value="exploration">来源 / 探索</option>
+              </select>
+            </div>
+            <div class="workbench">
+              <aside
+                id="run-list"
+                class="run-list"
+                aria-label="运行列表"
+              ></aside>
+              <div id="trace" class="trace-card">
+                <div class="empty">
+                  <div class="empty-symbol">⌁</div>
+                  <h3>选择一条执行记录</h3>
+                  <p>时间线、结果和失败现场将在这里显示。</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section
+            id="code-panel"
+            class="panel"
+            role="tabpanel"
+            hidden
+          ></section>
+          <section
+            id="versions-panel"
+            class="panel"
+            role="tabpanel"
+            hidden
+          ></section>
+          <footer class="page-footer">
+            <span>CUA / LOCAL OBSERVABILITY</span
+            ><span id="storage-note"
+              >只统计实际记录 · 不估算模型成本或 Token</span
+            >
+          </footer>
+        </div>
+      </main>
+    </div>
+    <aside
+      id="detail-drawer"
+      class="detail-drawer"
+      aria-label="调用详情"
+      hidden
+    ></aside>
+    <dialog id="run-dialog">
+      <form id="run-form">
+        <div class="dialog-head">
+          <div>
+            <div class="eyebrow">RUN RECIPE</div>
+            <h2>运行脚本</h2>
+          </div>
+          <button
+            type="button"
+            class="icon-button"
+            data-action="close-dialog"
+            aria-label="关闭"
+          >
+            ×
+          </button>
+        </div>
+        <div id="run-form-content"></div>
+        <div id="form-error" class="form-error" role="alert"></div>
+        <div class="dialog-actions">
+          <button
+            type="button"
+            class="button secondary"
+            data-action="close-dialog"
+          >
+            取消</button
+          ><button class="button primary" type="submit" id="submit-run">
+            ▶ 开始执行
+          </button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

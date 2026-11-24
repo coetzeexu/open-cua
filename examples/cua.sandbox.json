@@ -1,0 +1,13 @@
+{
+  "defaultProfile": "sandbox",
+  "profiles": {
+    "sandbox": {
+      "provider": "sandbox",
+      "sandbox": {
+        "endpointEnv": "CUA_BROWSER_CDP_URL",
+        "connectTimeoutMs": 30000,
+        "handoffUrlEnv": "CUA_BROWSER_HANDOFF_URL"
+      }
+    }
+  }
+}

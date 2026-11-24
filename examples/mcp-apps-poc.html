@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>CUA Windows MCP Apps POC</title>
+<style>
+  body { font: 18px system-ui; margin: 32px; color: #18232d; background: #f4f6f8; }
+  section { max-width: 720px; padding: 24px; background: white; border: 1px solid #cbd5df; border-radius: 12px; }
+  button, input { font: inherit; padding: 10px; }
+  #track { width: 420px; height: 56px; position: relative; background: #dce5ed; border-radius: 28px; touch-action: none; }
+  #handle { width: 56px; height: 56px; position: absolute; border: 0; border-radius: 50%; background: #1769aa; color: white; cursor: grab; touch-action: none; user-select: none; }
+  output { font-weight: bold; }
+</style>
+<section>
+  <h1>Windows 沙箱 · MCP Apps 验收</h1>
+  <p>这是测试夹具，不是真实登录页或验证码。</p>
+  <p>实时画面计时：<output id="clock">0</output> 秒</p>
+  <p><button id="count">模型计数 +1</button> 当前：<output id="countValue">0</output></p>
+  <p><label>测试输入 <input aria-label="测试输入" autocomplete="off"></label></p>
+  <p>按住蓝色圆点拖到最右端：</p>
+  <div id="track"><button id="handle" aria-label="拖动滑块">→</button></div>
+  <p>拖动进度：<output id="progress">0</output>%；释放次数：<output id="releases">0</output></p>
+  <p id="dragResult">尚未完成拖动</p>
+</section>
+<script>
+  const get = id => document.getElementById(id);
+  let count = 0, seconds = 0, active = false, offset = 0, progress = 0, releases = 0;
+  setInterval(() => get('clock').textContent = ++seconds, 1000);
+  get('count').onclick = () => get('countValue').textContent = ++count;
+  const handle = get('handle'), track = get('track');
+  handle.onpointerdown = event => {
+    active = true;
+    offset = event.clientX - handle.getBoundingClientRect().left;
+    handle.setPointerCapture(event.pointerId);
+  };
+  handle.onpointermove = event => {
+    if (!active) return;
+    const max = track.clientWidth - handle.offsetWidth;
+    const x = Math.max(0, Math.min(max, event.clientX - track.getBoundingClientRect().left - offset));
+    handle.style.left = x + 'px';
+    get('progress').textContent = progress = Math.round(x / max * 100);
+  };
+  handle.onpointerup = () => {
+    if (!active) return;
+    active = false;
+    get('releases').textContent = ++releases;
+    get('dragResult').textContent = progress >= 95 ? '拖动完成' : '已释放，可继续拖动';
+  };
+  handle.onpointercancel = () => { active = false; };
+</script>
+</html>

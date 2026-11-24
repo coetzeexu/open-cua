@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CUA 浏览器</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--color-text-primary, #183244);
+        background: var(--color-background-primary, #f4f7fa);
+        font: 13px system-ui;
+      }
+      main {
+        height: 560px;
+        max-height: 100vh;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        gap: 9px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      strong {
+        margin-right: auto;
+      }
+      button,
+      input {
+        font: inherit;
+        border: 1px solid #b9c9d3;
+        border-radius: 6px;
+        padding: 7px 10px;
+      }
+      button {
+        background: #fff;
+        color: #183244;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      button[data-action="take"] {
+        background: #174f69;
+        color: white;
+      }
+      #status {
+        min-height: 18px;
+      }
+      #viewport {
+        flex: 1;
+        min-height: 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #dce4e9;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      #viewport.disconnected {
+        background: #000;
+      }
+      #wake-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #wake-overlay[hidden],
+      #wake-spinner[hidden] {
+        display: none;
+      }
+      #recover {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      #wake-spinner {
+        width: 14px;
+        height: 14px;
+        border: 2px solid #b9c9d3;
+        border-top-color: #183244;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      #screen {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
+        touch-action: none;
+        outline: none;
+      }
+      #screen.active {
+        cursor: crosshair;
+      }
+      #empty {
+        position: absolute;
+        pointer-events: none;
+        color: #4e6574;
+      }
+      footer {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+      #text {
+        flex: 1;
+        min-width: 80px;
+      }
+      #requests {
+        max-height: 170px;
+        overflow: auto;
+      }
+      form {
+        padding: 8px;
+        background: #fff;
+        border: 1px solid #c5d1d8;
+        border-radius: 6px;
+      }
+      form p {
+        margin: 0 0 6px;
+      }
+      label {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        margin: 5px;
+      }
+      small {
+        color: #506575;
+      }
+      #error {
+        color: #a33030;
+        min-height: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <strong>沙箱 / 本机浏览器</strong
+        ><button data-action="take" disabled>取得控制权</button
+        ><button data-action="interrupt" disabled>中断</button
+        ><button data-action="resume" disabled>交还模型</button
+        ><button id="refresh" disabled>刷新</button>
+      </header>
+      <div id="status" role="status">等待宿主连接…</div>
+      <section id="viewport">
+        <span id="empty">请先让模型连接浏览器，再打开面板</span
+        ><img
+          id="screen"
+          alt="当前浏览器页面视口"
+          draggable="false"
+          tabindex="0"
+        />
+        <div id="wake-overlay" hidden aria-busy="false">
+          <button id="recover" disabled>
+            <span id="wake-spinner" hidden aria-hidden="true"></span
+            ><span id="wake-label">唤醒</span>
+          </button>
+        </div>
+      </section>
+      <footer>
+        <input
+          id="text"
+          type="password"
+          autocomplete="off"
+          placeholder="先点击画面中的目标框，再在此输入"
+          aria-label="人工输入"
+        /><button id="insert" disabled>输入到页面</button
+        ><button id="enter" disabled>回车</button
+        ><button id="select" disabled>全选</button>
+      </footer>
+      <div id="requests"></div>
+      <small
+        >取得控制权后可点击、拖动、滚动和输入。交还后请让模型重新观察并继续。关闭面板不会自动交还。</small
+      >
+      <div id="recovery-note" role="status"></div>
+      <div id="error" role="alert"></div>
+    </main>
+    <script type="module">
+      __APP_SCRIPT__;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "defaultProfile": "local",
+  "profiles": {
+    "local": {
+      "provider": "local",
+      "local": { "channel": "chrome", "headless": true }
+    }
+  },
+  "history": {
+    "enabled": true,
+    "directory": "~/.cua/history",
+    "captureOnFailure": true,
+    "upload": { "enabled": false }
+  },
+  "recipes": {
+    "directory": "~/.cua/recipes",
+    "distill": { "mode": "manual" },
+    "repair": { "mode": "manual" }
+  }
+}

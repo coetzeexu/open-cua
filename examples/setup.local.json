@@ -1,0 +1,12 @@
+{
+  "host": "generic-mcp-agent",
+  "provider": "local",
+  "mode": "create",
+  "headless": false,
+  "apps": false,
+  "history": true,
+  "captureOnFailure": true,
+  "distill": "manual",
+  "repair": "manual",
+  "serverName": "cua"
+}

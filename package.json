@@ -1,0 +1,57 @@
+{
+  "name": "open-cua",
+  "version": "0.7.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.3.12",
+  "engines": {
+    "node": ">=24.18.0 <25"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dashboard": "node packages/cli/dist/index.js dashboard",
+    "build": "bun scripts/build.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun run build && node --experimental-vm-modules --import tsx --import ./tests/isolate-history.mjs --test --test-concurrency=2 tests/*.test.ts",
+    "test:chrome": "CUA_REAL_CHROME=1 node --experimental-vm-modules --import tsx --test --test-concurrency=1 tests/chrome/*.test.ts",
+    "check:boundaries": "bun scripts/boundaries.ts",
+    "check": "bun run typecheck && bun run check:boundaries && bun run test",
+    "format": "prettier --write packages scripts tests deploy/sandbox",
+    "format:check": "prettier --check packages scripts tests deploy/sandbox",
+    "test:agentbay": "bun run build && CUA_REAL_AGENTBAY=1 node --experimental-vm-modules --import tsx --test --test-concurrency=1 tests/agentbay/*.test.ts",
+    "package:sandbox": "bun run build && bun scripts/package-sandbox.ts",
+    "test:sandbox": "node deploy/sandbox/mock-messages.mjs",
+    "preview": "node deploy/sandbox/preview.mjs",
+    "package:windows": "bun run build && bun scripts/package-sandbox.ts --target=win32-x64",
+    "package:linux": "bun run build && bun scripts/package-sandbox.ts --target=linux-x64",
+    "package:mac": "bun run build && bun scripts/package-sandbox.ts --target=darwin-arm64",
+    "test:parity": "node deploy/sandbox/check-parity.mjs"
+  },
+  "devDependencies": {
+    "@cua/dashboard": "workspace:*",
+    "@cua/browser-agentbay": "workspace:*",
+    "@cua/browser-chromium": "workspace:*",
+    "@cua/browser-local": "workspace:*",
+    "@cua/browser-sandbox": "workspace:*",
+    "@cua/cli": "workspace:*",
+    "@cua/contracts": "workspace:*",
+    "@cua/core": "workspace:*",
+    "@cua/mcp": "workspace:*",
+    "@cua/preview": "workspace:*",
+    "@cua/repl": "workspace:*",
+    "@cua/runner": "workspace:*",
+    "@cua/service": "workspace:*",
+    "@cua/testing": "workspace:*",
+    "@modelcontextprotocol/ext-apps": "1.1.2",
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@types/node": "24.10.1",
+    "happy-dom": "21.0.1",
+    "prettier": "3.6.2",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "@cua/history": "workspace:*",
+    "@cua/recipes": "workspace:*"
+  }
+}

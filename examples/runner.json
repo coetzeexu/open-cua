@@ -1,0 +1,40 @@
+{
+  "listen": {
+    "host": "127.0.0.1",
+    "port": 30153,
+    "token_env": "CUA_RUNNER_TOKEN"
+  },
+  "mcp": {
+    "url": "http://127.0.0.1:30151/mcp",
+    "token_env": "CUA_MCP_TOKEN",
+    "profile": "sandbox",
+    "observation_mode": "default"
+  },
+  "script_source": {
+    "base_url": "https://scripts.example.com/cua",
+    "token_env": "CUA_SCRIPT_TOKEN"
+  },
+  "input_files": {
+    "base_url": "https://files.example.com/input",
+    "token_env": "CUA_FILE_TOKEN",
+    "max_bytes": 52428800
+  },
+  "output_files": {
+    "base_url": "https://files.example.com/output",
+    "token_env": "CUA_FILE_TOKEN",
+    "max_bytes": 52428800
+  },
+  "work_directory": "/var/lib/cua-runner/work",
+  "state_directory": "/var/lib/cua-runner/state",
+  "limits": {
+    "max_queue_size": 100,
+    "request_max_bytes": 1048576,
+    "max_script_bytes": 1048576,
+    "max_files_per_run": 20,
+    "max_run_file_bytes": 209715200,
+    "run_timeout_ms": 600000,
+    "io_timeout_ms": 30000,
+    "cleanup_timeout_ms": 30000,
+    "retention_days": 7
+  }
+}

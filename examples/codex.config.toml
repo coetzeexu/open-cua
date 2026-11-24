@@ -1,0 +1,15 @@
+# Local browser setup. For the in-sandbox service see codex.sandbox-*.config.toml.
+# Replace /absolute/path/open-cua with your checkout path.
+# Use an absolute Node 24 executable if the desktop app does not inherit your shell PATH.
+[mcp_servers.cua]
+command = "node"
+args = ["/absolute/path/open-cua/packages/cli/dist/index.js", "serve", "--config", "/absolute/path/open-cua/examples/cua.local.json"]
+cwd = "/absolute/path/open-cua"
+startup_timeout_sec = 20
+tool_timeout_sec = 45
+# Add the next line only when using an AgentBay profile; keep the value out of this file.
+# env_vars = ["AGENTBAY_API_KEY"]
+
+# Enable only with a trusted MCP Apps-capable host; no effect on plain CLI hosts.
+[mcp_servers.cua.env]
+CUA_MCP_APPS = "1"

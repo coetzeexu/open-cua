@@ -1,0 +1,19 @@
+node_modules/
+packages/*/dist/
+coverage/
+artifacts/
+*.tsbuildinfo
+.env
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local acceptance evidence and site-specific business cases.
+/outputs/
+/docs/cases/
+/docs/reports/
+/examples/recipes/
+/scripts/pdd-resilience*.mjs
+/scripts/pdd-resilience*.ts
+/scripts/recipe-acceptance-mcp.mjs
+/tests/tplus-recipe.test.ts

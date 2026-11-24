@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CUA · Live preview</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/">CUA<span> / LIVE PREVIEW</span></a>
+      <div class="connection">
+        <i id="liveDot"></i><span id="connection">连接中</span>
+      </div>
+    </header>
+    <main>
+      <div class="heading">
+        <div>
+          <p class="eyebrow">BROWSER CONTROL ROOM</p>
+          <h1>看见操作，也能接手。</h1>
+          <p class="sub">
+            用固定 mock 消息演示模型操作；可随时中断并接手同一浏览器。
+          </p>
+        </div>
+        <span id="mode" class="mode">连接中</span>
+      </div>
+      <section class="toolbar">
+        <div class="actions">
+          <button id="run" class="primary">▶ 运行演示</button
+          ><button id="take">取得控制权</button
+          ><button id="stop" class="danger">■ 中断</button
+          ><button id="resume">交还模型</button>
+        </div>
+        <span id="hint">正在读取浏览器状态</span>
+      </section>
+      <div id="error" role="alert" hidden></div>
+      <div class="workspace">
+        <section class="viewer">
+          <div class="viewerbar">
+            <div class="dots"><b></b><b></b><b></b></div>
+            <span>沙箱浏览器 · 页面视口</span
+            ><span id="frameInfo">等待画面</span>
+          </div>
+          <form id="nav">
+            <input
+              id="url"
+              type="url"
+              placeholder="取得控制权后输入 https:// 地址"
+              aria-label="访问地址"
+            /><button type="submit">前往</button>
+          </form>
+          <div class="screen">
+            <img draggable="false" id="screen" alt="沙箱浏览器实时画面" />
+            <div id="loading">正在连接浏览器画面…</div>
+          </div>
+          <div class="screenfoot">
+            <span id="inputHint">只读预览 · 取得控制权后可点击、输入和滚动</span
+            ><span>连续画面 / 最高 4 FPS</span>
+          </div>
+          <textarea
+            id="keyboard"
+            aria-label="远程浏览器键盘输入"
+            autocomplete="off"
+            spellcheck="false"
+          ></textarea>
+        </section>
+        <aside>
+          <section class="card">
+            <p class="eyebrow">SESSION</p>
+            <h2>当前会话</h2>
+            <dl>
+              <dt>运行平台</dt>
+              <dd id="platform">—</dd>
+              <dt>浏览器</dt>
+              <dd id="browser">—</dd>
+              <dt>执行状态</dt>
+              <dd id="execution">—</dd>
+              <dt>连接方式</dt>
+              <dd id="provider">—</dd>
+            </dl>
+            <p class="note">
+              画面与人工输入走独立通道。输入请求不会作为模型指令或事件日志保存。
+            </p>
+          </section>
+          <section class="card events">
+            <p class="eyebrow">ACTIVITY</p>
+            <h2>控制记录</h2>
+            <ol id="logs">
+              <li>等待连接</li>
+            </ol>
+          </section>
+        </aside>
+      </div>
+      <footer>
+        <span class="footer-copy"
+          >演示会话 · 关闭网页不会交还控制权，请点击“交还模型”或“中断”。</span
+        ><span id="session"></span>
+        <button id="endDemo" hidden>结束并释放演示沙箱</button>
+      </footer>
+    </main>
+    <script type="module" src="/app.js"></script>
+    <script type="module" src="/scenario.js"></script>
+  </body>
+</html>
